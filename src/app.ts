@@ -11,14 +11,14 @@ const app: Application = express();
 app.use(express.json());
 app.use(cors());
 
-// app.use('/api', router);
+app.use('/api', router);
 
 
 app.get('/', (req: Request, res: Response) => {
   res.send(`
       <html>
         <head>
-          <title>Recipe Sharing Community Server</title>
+          <title>Gym Class Schedule Management</title>
           <style>
             body {
               display: flex;

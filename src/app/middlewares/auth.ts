@@ -5,7 +5,7 @@ import catchAsync from "../utils/catchAsync";
 import jwt, { JwtPayload } from "jsonwebtoken";
 import config from "../config";
 import { User } from "../modules/User/user.model";
-import httpStatus from "http-status";
+
 
 export const Auth = (...requiredRoles: (keyof typeof USER_Role)[]) => {
   return catchAsync(async (req, res, next) => {
@@ -13,7 +13,7 @@ export const Auth = (...requiredRoles: (keyof typeof USER_Role)[]) => {
     console.log(token);
     if (!token) {
       throw new AppError(
-        httpStatus.UNAUTHORIZED,
+        401,
         "You are not authorized tok tok"
       );
     }
@@ -26,11 +26,11 @@ export const Auth = (...requiredRoles: (keyof typeof USER_Role)[]) => {
     // checking existing user
     const user = await User.findOne({ email });
     if (!user) {
-      throw new AppError(httpStatus.UNAUTHORIZED, "User not found");
+      throw new AppError(401, "User not found");
     }
     if (!requiredRoles.includes(role)) {
       throw new AppError(
-        httpStatus.UNAUTHORIZED,
+        401,
         "You are not authorized to access this route"
       );
     }
