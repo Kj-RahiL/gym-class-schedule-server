@@ -17,7 +17,7 @@ const createAdminIntoDB = async (payload: TUser) => {
   return admin;
 };
 const getAllUser = async () => {
-  const result = await User.find({ role: 'user' });
+  const result = await User.find({ role: 'Trainee' });
   return result;
 };
 const getUserFromDB = async (id: string) => {
