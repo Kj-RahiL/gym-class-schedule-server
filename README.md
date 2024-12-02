@@ -70,6 +70,12 @@ The Gym Class Scheduling and Membership Management System is designed to manage 
 ### Admin Access
 - To access only admin can manage trainer and schedule.
 
+## Admin Credential
+  ```
+  email: rahiilarham@gmail.com
+  pass: 123456
+ ```
+
 ## 🔗 API Endpoints
 
 Below are some key API endpoints available for this application. For a full list, refer to the API Documentation if Swagger or similar is set up.
