@@ -22,7 +22,7 @@ The Gym Class Scheduling and Membership Management System is designed to manage 
 - **Error Handling**: Global error handling middleware
 
 ## project Diagram
-![Gym Class Scheduling]('./ProjectDiagram.png')
+![Gym Class Scheduling](./ProjectDiagram.png)
 
 ## Installation
 
