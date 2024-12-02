@@ -1,6 +1,6 @@
 # 🧘‍♂️ Gym Class Scheduling and Membership Management Server app
 
-## Live Url: 
+## Live Url: https://gym-class-schedule.vercel.app
 
 ## Story
 
