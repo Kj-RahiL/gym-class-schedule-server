@@ -21,7 +21,7 @@ const getScheduleFromDB = async (id: string) => {
   if (!schedule) {
     throw new AppError(404, "Schedule Not found.");
   }
-  return Schedule;
+  return schedule;
 };
 
 const updateScheduleIntoDB = async (id: string, payload:TSchedule) => {

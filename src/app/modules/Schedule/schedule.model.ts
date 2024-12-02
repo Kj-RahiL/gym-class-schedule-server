@@ -1,4 +1,4 @@
-import  { model, Schema } from "mongoose";
+import { model, Schema } from "mongoose";
 import { TSchedule } from "./schedule.interface";
 
 const ScheduleSchema = new Schema<TSchedule>({
@@ -11,6 +11,7 @@ const ScheduleSchema = new Schema<TSchedule>({
   startTime: { type: String, required: true },
   endTime: { type: String, required: true },
   maxCapacity: { type: Number, default: 10 },
+  bookCount: { type: Number, default: 10 },
 });
 
 export const Schedule = model<TSchedule>("Schedule", ScheduleSchema);

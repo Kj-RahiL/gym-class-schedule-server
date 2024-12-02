@@ -6,4 +6,5 @@ export type TSchedule = {
   startTime: string;
   endTime: string;
   maxCapacity?: number;
+  bookCount:number
 };
