@@ -1,4 +1,5 @@
 import AppError from "../../errors/appError";
+import { Trainer } from "../Trainer/trainer.model";
 import { TSchedule } from "./schedule.interface";
 import { Schedule } from "./schedule.model";
 
@@ -13,7 +14,15 @@ const createScheduleIntoDB = async (payload: TSchedule) => {
   return newSchedule;
 };
 const getAllSchedule = async () => {
-  const result = await Schedule.find().populate('trainer', 'user');
+  const result = await Schedule.find().populate({
+    path: 'trainer', 
+    select: 'user specialization',  
+    populate: {
+      path: 'user',  
+      select: 'name email', 
+    },
+  })
+  .exec();
   return result;
 };
 const getScheduleFromDB = async (id: string) => {
@@ -24,10 +33,30 @@ const getScheduleFromDB = async (id: string) => {
   return schedule;
 };
 
-const updateScheduleIntoDB = async (id: string, payload:TSchedule) => {
-  const isSchedule = await Schedule.findById(id);
+const getScheduleByTrainerFromDB = async (id: string) => {
 
-  console.log(isSchedule);
+  const isTrainer = await Trainer.findById(id)
+  if (!isTrainer) {
+    throw new AppError(404, "Trainer is Not found.");
+  }
+  const schedule = await Schedule.find({trainer: id}).populate({
+    path: 'trainer', 
+    select: 'user specialization',  
+    populate: {
+      path: 'user',  
+      select: 'name email', 
+    },
+  })
+  .exec();
+  if (!schedule) {
+    throw new AppError(404, "Schedule Not found.");
+  }
+  return schedule;
+};
+
+const updateScheduleIntoDB = async (id: string, payload:TSchedule) => {
+  console.log(payload, 'paay')
+  const isSchedule = await Schedule.findById(id);
 
   if (!isSchedule) {
     throw new AppError(404, "Schedule not found");
@@ -52,6 +81,7 @@ export const ScheduleServices = {
   createScheduleIntoDB,
   getScheduleFromDB,
   getAllSchedule,
+  getScheduleByTrainerFromDB,
   updateScheduleIntoDB,
   deleteScheduleIntoDB,
 };

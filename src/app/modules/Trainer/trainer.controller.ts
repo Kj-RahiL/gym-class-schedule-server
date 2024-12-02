@@ -38,8 +38,9 @@ const getTrainer = catchAsync(async (req, res) => {
 const updateTrainer = catchAsync(async (req, res) => {
   
   const { id } = req.params;
-  console.log('api hit', id, req.params)
-  const result = await TrainerServices.updateTrainerIntoDB(id, req.body);
+  const { updatedData } = req.body;
+  console.log('api hit', id, updatedData)
+  const result = await TrainerServices.updateTrainerIntoDB(id, updatedData);
 
   sendResponse(res, {
     statusCode: 200,

@@ -13,6 +13,9 @@ router.post(
 //get
 router.get('/:id', scheduleControllers.getSchedule);
 
+// get specipic trainer schedule
+router.get('/trainer/:trainerId', scheduleControllers.getScheduleByTrainer);
+
 //update
 router.put(
   '/:id',

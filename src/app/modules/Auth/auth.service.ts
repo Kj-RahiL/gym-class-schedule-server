@@ -8,6 +8,7 @@ import config from '../../config';
 import jwt, { JwtPayload } from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 import { isPasswordMatched } from './auth.utils';
+import { Trainer } from '../Trainer/trainer.model';
 
 const signupFromDB = async (payload: TUser) => {
   const user = await User.findOne({ email: payload.email });
@@ -22,24 +23,30 @@ const signupFromDB = async (payload: TUser) => {
 };
 
 const loginIntoDB = async (payload: TLoginUser) => {
-  const user = await User.findOne({ email: payload.email }).select('+password');
-  if (!user) {
+  const isUser = await User.findOne({ email: payload.email }).select('+password');
+  if (!isUser) {
     throw new AppError(404, 'User not found');
   }
   const passwordMatch = await isPasswordMatched(
     payload.password,
-    user.password,
+    isUser.password,
   );
   if (!passwordMatch) {
     throw new AppError(404, "Password doesn't match !");
   }
+    // Fetch trainer data if user is a trainer
+    let trainer = null;
+    if (isUser.role === 'Trainer') {
+      trainer = await Trainer.findOne({ user: isUser._id });
+    }
 
   const jwtPayload = {
-    id: user.id,
-    name: user.name,
-    email: user.email,
-    role: user.role,
-    status: user.status,
+    id: isUser.id,
+    name: isUser.name,
+    email: isUser.email,
+    role: isUser.role,
+    status: isUser.status,
+    trainerId: trainer?._id
     
   };
 

@@ -10,8 +10,8 @@ const ScheduleSchema = new Schema<TSchedule>({
   date: { type: Date, required: true },
   startTime: { type: String, required: true },
   endTime: { type: String, required: true },
-  maxCapacity: { type: Number, default: 10 },
-  bookCount: { type: Number, default: 10 },
+  maxCapacity: { type: Number, default: 15 },
+  bookCount: { type: Number, default: 0 },
 });
 
 export const Schedule = model<TSchedule>("Schedule", ScheduleSchema);

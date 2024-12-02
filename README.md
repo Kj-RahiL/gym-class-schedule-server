@@ -21,6 +21,9 @@ The Gym Class Scheduling and Membership Management System is designed to manage 
 - **Authentication**: JSON Web Tokens (JWT) for secure authentication
 - **Error Handling**: Global error handling middleware
 
+## project Diagram
+![Gym Class Scheduling]('./ProjectDiagram.png')
+
 ## Installation
 
 1. Clone the repository:

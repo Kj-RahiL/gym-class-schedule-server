@@ -34,10 +34,23 @@ const getSchedule = catchAsync(async (req, res) => {
   });
 });
 
+const getScheduleByTrainer = catchAsync(async (req, res) => {
+  const {trainerId} =req.params
+  console.log(req.params ," =", trainerId)
+  const result = await ScheduleServices.getScheduleByTrainerFromDB(trainerId);
+  sendResponse(res, {
+    statusCode: 200,
+    success: true,
+    message: 'Schedule retrieved successfully!',
+    data: result,
+  });
+});
+
 const updateSchedule = catchAsync(async (req, res) => {
   
   const { id } = req.params;
-  const result = await ScheduleServices.updateScheduleIntoDB(id, req.body);
+  const { scheduleInfo } = req.body;
+  const result = await ScheduleServices.updateScheduleIntoDB(id, scheduleInfo);
 
   sendResponse(res, {
     statusCode: 200,
@@ -63,6 +76,7 @@ export const scheduleControllers = {
   createSchedule,
   getAllSchedule,
   getSchedule,
+  getScheduleByTrainer,
   updateSchedule,
   deleteSchedule
 };
